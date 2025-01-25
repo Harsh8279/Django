@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block start %}
+    <h1>This is Index Page!!</h1>
+
+    <a href="/contact-us/">Contact-Us</a>
+    <br/>
+    <a href="/about-us/">About-Us</a>
+    <br/>
+    <br/>
+
+    <table class="container">
+        <tr>
+          <th>Sr. No</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Can vote?</th>
+          <th>Details</th>
+          <th>Is Onion present ?</th>
+        </tr>
+        {% for data in people %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.age}}</td>
+                <td {% if data.age < 18 %} style="background: red;" {% endif %}>
+                    {% if data.age >= 18 %}
+                        &#128077;
+                    {% else %}
+                        &#128078;
+                    {% endif %}
+                </td>
+                <td>
+                    {{details|truncatechars:10}}
+                </td>
+                <td>{{vegetables.0}}</td>
+            </tr>
+        {% endfor %}
+      </table>
+
+      {% if "onion" in vegetables %}
+        <p>Onion is present</p>
+      {% elif "tomato" in vegetables %}
+        <p>tomato is present</p>
+      {% else %}
+        <p>both is not present!!</p>
+      {% endif %}
+
+{% endblock %}
